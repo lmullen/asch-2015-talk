@@ -34,6 +34,12 @@ map
 .addCartoLayer(towns)
 .addCartoLayer(churches);
 
+d3.select("body")
+.append("div")
+.classed("animate-control", true)
+.text("Animate all churches")
+.on("click", animateCircles);
+
 function scaleChurchCircles() {
   memberScale = d3.scale.linear().domain([0,800]).range([3,15]).clamp(true);
   churches.g().selectAll("circle").attr("r", function(d) {
@@ -42,7 +48,22 @@ function scaleChurchCircles() {
     } else {
       return 3;
     }
-      
   })
+
+}
+
+function animateCircles() {
+
+  churches.g().selectAll("circle").attr("r", 0);
+
+  memberScale = d3.scale.linear().domain([0,800]).range([3,15]).clamp(true);
+
+  churches.g().selectAll("circle").transition().attr("r", function(d) {
+    if(d.members > 0) {
+      return memberScale(d.members);
+    } else {
+      return 3;
+    }
+  }).duration(3000);
 
 }
