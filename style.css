@@ -2,3 +2,18 @@
   height:100%;
   width:100%;
 }
+
+.church {
+  fill: red;
+  fill-opacity: 0.5;
+  stroke: black;
+  stroke-width: 1px;
+}
+
+.town {
+  fill: white;
+  fill-opacity: 0;
+  stroke: purple;
+  stroke-width: 1px;
+
+}
