@@ -16,7 +16,16 @@ towns
 .cssClass("town")
 .clickableFeatures(true);
 
-churches = d3.carto.layer.csv();
+var census = d3.carto.layer.topojson();
+
+census
+.path("census.topojson")
+.label("Census")
+.renderMode("svg")
+.cssClass("census")
+.clickableFeatures(true);
+
+var churches = d3.carto.layer.csv();
 
 churches
 .path("congregationalists.csv")
@@ -32,6 +41,7 @@ churches
 map
 .addCartoLayer(baseLayer)
 .addCartoLayer(towns)
+.addCartoLayer(census)
 .addCartoLayer(churches);
 
 d3.select("body")

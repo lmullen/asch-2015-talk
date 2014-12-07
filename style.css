@@ -18,6 +18,12 @@
 
 }
 
+.census {
+  fill: none;
+  stroke: darkgray;
+  stroke-width: 2px;
+}
+
 .animate-control {
   position: absolute;
   bottom: 20px;
