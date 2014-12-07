@@ -27,10 +27,22 @@ churches
 .x("lon")
 .y("lat")
 .clickableFeatures(true)
+.on("load", scaleChurchCircles);
 
 map
 .addCartoLayer(baseLayer)
 .addCartoLayer(towns)
 .addCartoLayer(churches);
 
+function scaleChurchCircles() {
+  memberScale = d3.scale.linear().domain([0,800]).range([3,15]).clamp(true);
+  churches.g().selectAll("circle").attr("r", function(d) {
+    if(d.members > 0) {
+      return memberScale(d.members);
+    } else {
+      return 3;
+    }
+      
+  })
 
+}
