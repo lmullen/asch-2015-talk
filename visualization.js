@@ -23,7 +23,8 @@ census
 .label("Census")
 .renderMode("svg")
 .cssClass("census")
-.clickableFeatures(true);
+.clickableFeatures(true)
+.on("load", choroplethCensus);
 
 var churches = d3.carto.layer.csv();
 
@@ -51,7 +52,7 @@ d3.select("body")
 .on("click", animateCircles);
 
 function scaleChurchCircles() {
-  memberScale = d3.scale.linear().domain([0,800]).range([3,15]).clamp(true);
+  var memberScale = d3.scale.linear().domain([0,800]).range([3,15]).clamp(true);
   churches.g().selectAll("circle").attr("r", function(d) {
     if(d.members > 0) {
       return memberScale(d.members);
@@ -66,7 +67,7 @@ function animateCircles() {
 
   churches.g().selectAll("circle").attr("r", 0);
 
-  memberScale = d3.scale.linear().domain([0,800]).range([3,15]).clamp(true);
+  var memberScale = d3.scale.linear().domain([0,800]).range([3,15]).clamp(true);
 
   churches.g().selectAll("circle").transition().attr("r", function(d) {
     if(d.members > 0) {
@@ -76,4 +77,11 @@ function animateCircles() {
     }
   }).duration(3000);
 
+}
+
+function choroplethCensus() {
+  var censusScale = d3.scale.linear().domain([0, 75]).range(["white", "red"]);
+  census.g().selectAll("path").style("fill", function(d) {
+    return censusScale(d.properties.cong);
+  });
 }
