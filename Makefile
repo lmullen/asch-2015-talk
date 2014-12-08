@@ -1,12 +1,4 @@
-all: towns.topojson census.topojson
-
-townssurvey_shp.zip :
-	curl -O http://wsgw.mass.gov/data/gispub/shape/state/townssurvey_shp.zip
-
-towns.topojson : townssurvey_shp.zip
-	unzip -o $^ -d shp
-	ogr2ogr -t_srs EPSG:4326 shp/reprojected.shp shp/TOWNSSURVEY_POLY.shp 
-	topojson --simplify-proportion 0.10 -p town=TOWN shp/reprojected.shp -o $@
+all: census.topojson
 
 census.topojson : nhgis0035_csv.zip nhgis0035_shape.zip
 	unzip -o nhgis0035_csv.zip -d census
@@ -25,5 +17,4 @@ clean:
 	rm -rf census/
 
 clobber: clean
-	rm -rf towns.topojson
 	rm -rf census.topojson
