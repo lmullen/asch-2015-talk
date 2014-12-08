@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="d3map.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="http://d3js.org/queue.v1.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js" charset="utf-8"></script>
+    <script src="d3.carto.map.js" charset="utf-8"></script>
+    <script src="tile.js" charset="utf-8"></script>
+    <script src="stack.v1.min.js"></script>
+
+<section>
+  <h2>This is the title</h2>
+  <p>This is the body here</p>
+</section>
+
+<section style="background-image:url('gaustad-congregationalists.jpg'); 
+  background-size: contain; background-repeat: no-repeat; 
+  background-position: center;">
+</section>
+
+<section id="congregationalists">
+  <div id="congregationalists-map" class="map">
+  </div>
+</section>
+
+<section id="gaustad-slide">
+  <div id="gaustad-map" class="map">
+  </div>
+</section>
+
+<script>
+
+var mystack = stack()
+    .on("activate", activate)
+    .on("deactivate", deactivate);
+
+function drawCongregationalists() {
+  congregationalistsMap = d3.carto.map();
+  d3.select("#congregationalists-map").call(congregationalistsMap);
+  congregationalistsMap
+  .centerOn([-71.668006, 42.239650], "latlong")
+  .setScale(8);
+  
+
+  baseLayer = d3.carto.layer.tile();
+  baseLayer
+  .path("lmullen.ke033le7")
+  .tileType("mapbox")
+  .label("Base");
+
+  churches = d3.carto.layer.csv();
+
+  churches
+  .path("congregationalists.csv")
+  .label("Churches")
+  .cssClass("church")
+  .renderMode("svg")
+  .x("lon")
+  .y("lat")
+  .markerSize(0)
+  .clickableFeatures(true)
+  .on("load", scaleChurchCircles);
+
+  congregationalistsMap
+  .addCartoLayer(baseLayer)
+  .addCartoLayer(churches)
+  .zoomable(false);
+
+}
+
+function scaleChurchCircles() {
+  var memberScale = d3.scale.sqrt().domain([0,800]).range([0,15]).clamp(true);
+  churches.g().selectAll("circle")
+  .transition()
+  .attr("r", function(d) {
+     if(d.members > 0) {
+       return memberScale(d.members);
+     } else {
+       return 1;
+     }
+  })
+  .duration(2500)
+  .delay(function(d, i) { return i / 500 * 2500; });
+
+}
+
+function deleteCongregationalists() {
+  d3.select("#congregationalists-map").selectAll("*").remove();
+}
+
+var section = d3.selectAll("section"),
+    congregationalistsNode = d3.select("#congregationalists"),
+    congregationalistsIndex = section[0].indexOf(congregationalistsNode.node());
+//     followAnchor = d3.select("#follow-anchor"),
+//     lorenz = d3.select("#lorenz"),
+//     lorenzIndex = section[0].indexOf(lorenz.node());
+
+function refollow() {
+  followAnchor.style("top", (followIndex + (1 - mystack.scrollRatio()) / 2 - d3.event.offset) * 100 + "%");
+}
+
+function activate(d, i) {
+ if (i === congregationalistsIndex) drawCongregationalists();
+//  if (i === lorenzIndex) startLorenz();
+}
+
+function deactivate(d, i) {
+ if (i === congregationalistsIndex) deleteCongregationalists();
+//  if (i === followIndex) mystack.on("scroll.follow", null);
+//  if (i === lorenzIndex) stopLorenz();
+}
+
+</script>
