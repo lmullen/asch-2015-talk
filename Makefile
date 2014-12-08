@@ -12,6 +12,11 @@ census.topojson : nhgis0035_csv.zip nhgis0035_shape.zip
 		-p cong=+AET003 -- \
 		census/counties.shp
 
+deploy:
+	rsync --progress --delete -avz \
+		*.topojson *.html *.css *.js *.csv *.jpg \
+		reclaim:~/public_html/lincolnmullen.com/projects/asch-mapping/
+
 clean:
 	rm -rf shp/
 	rm -rf census/
