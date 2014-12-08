@@ -13,13 +13,19 @@
     <script src="stack.v1.min.js"></script>
 
 <section>
-  <h2>This is the title</h2>
+  <h3>This is the title</h3>
   <p>This is the body here</p>
 </section>
 
 <section style="background-image:url('gaustad-congregationalists.jpg'); 
   background-size: contain; background-repeat: no-repeat; 
   background-position: center;">
+</section>
+
+<section id="gaustad-slide">
+  <h2> Gaustad map</h2>
+  <div id="gaustad-map" class="map">
+  </div>
 </section>
 
 <section id="congregationalists">
@@ -33,12 +39,6 @@
       id="diachronic-date">1620</span>
   </h2>
   <div id="diachronic-map" class="map">
-  </div>
-</section>
-
-<section id="gaustad-slide">
-  <p> Gaustad map</p>
-  <div id="gaustad-map" class="map">
   </div>
 </section>
 
@@ -123,8 +123,6 @@ function churchesOverTime() {
 
   timer = setInterval(function() {
 
-    console.log(date);
-
     churchesDiachronic.g().selectAll("circle")
       .transition()
       .attr("r", function(d) {
@@ -160,6 +158,31 @@ function scaleChurchCircles() {
 
 }
 
+function drawGaustad() {
+  gaustadMap = d3.carto.map();
+  d3.select("#gaustad-map").call(gaustadMap);
+  gaustadMap.centerOn([-71.668006, 42.239650], "latlong").setScale(8);
+
+  census = d3.carto.layer.topojson();
+  census
+  .path("census.topojson")
+  .label("Census")
+  .renderMode("svg")
+  .cssClass("census")
+  .clickableFeatures(false)
+  .on("load", choroplethCensus);
+
+  gaustadMap.addCartoLayer(census);
+
+}
+
+function choroplethCensus() {
+  var censusScale = d3.scale.linear().domain([0, 75]).range(["white", "red"]);
+  census.g().selectAll("path").style("fill", function(d) {
+    return censusScale(d.properties.cong);
+  }).style("fill-opacity", 1);
+}
+
 function deleteCongregationalists() {
   d3.select("#congregationalists-map").selectAll("*").remove();
 }
@@ -169,14 +192,17 @@ function deleteDiachronic() {
   d3.select("#diachronic-map").selectAll("*").remove();
 }
 
+function deleteGaustad() {
+  d3.select("#gaustad-map").selectAll("*").remove();
+}
+
 var section = d3.selectAll("section"),
     congregationalistsNode = d3.select("#congregationalists"),
     congregationalistsIndex = section[0].indexOf(congregationalistsNode.node());
     diachronicNode = d3.select("#diachronic"),
     diachronicIndex = section[0].indexOf(diachronicNode.node());
-//     followAnchor = d3.select("#follow-anchor"),
-//     lorenz = d3.select("#lorenz"),
-//     lorenzIndex = section[0].indexOf(lorenz.node());
+    gaustadNode = d3.select("#gaustad-slide"),
+    gaustadIndex = section[0].indexOf(gaustadNode.node());
 
 function refollow() {
   followAnchor.style("top", (followIndex + (1 - mystack.scrollRatio()) / 2 - d3.event.offset) * 100 + "%");
@@ -185,14 +211,13 @@ function refollow() {
 function activate(d, i) {
  if (i === congregationalistsIndex) drawCongregationalists();
  if (i === diachronicIndex) drawDiachronic();
-//  if (i === lorenzIndex) startLorenz();
+ if (i === gaustadIndex) drawGaustad();
 }
 
 function deactivate(d, i) {
  if (i === congregationalistsIndex) deleteCongregationalists();
  if (i === diachronicIndex) deleteDiachronic();
-//  if (i === followIndex) mystack.on("scroll.follow", null);
-//  if (i === lorenzIndex) stopLorenz();
+ if (i === gaustadIndex) deleteGaustad();
 }
 
 </script>
