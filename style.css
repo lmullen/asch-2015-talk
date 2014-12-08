@@ -54,6 +54,14 @@ section {
   /* font-size: 1.2rem; */
 }
 
+h2 {
+  left: 20px;
+  top: 10px;
+  position: fixed;
+  /* color: white; */
+  z-index:20;
+} 
+
 #d3MapLayerBox {
   display: none;
 }

@@ -23,11 +23,21 @@
 </section>
 
 <section id="congregationalists">
+  <h2>Congregationalists in 1854</h2>
   <div id="congregationalists-map" class="map">
   </div>
 </section>
 
+<section id="diachronic">
+  <h2>Congregationalists in <span 
+      id="diachronic-date">1620</span>
+  </h2>
+  <div id="diachronic-map" class="map">
+  </div>
+</section>
+
 <section id="gaustad-slide">
+  <p> Gaustad map</p>
   <div id="gaustad-map" class="map">
   </div>
 </section>
@@ -62,7 +72,7 @@ function drawCongregationalists() {
   .x("lon")
   .y("lat")
   .markerSize(0)
-  .clickableFeatures(true)
+  .clickableFeatures(false)
   .on("load", scaleChurchCircles);
 
   congregationalistsMap
@@ -70,6 +80,68 @@ function drawCongregationalists() {
   .addCartoLayer(churches)
   .zoomable(false);
 
+}
+
+
+function drawDiachronic() {
+  diachronicMap = d3.carto.map();
+  d3.select("#diachronic-map").call(diachronicMap);
+  diachronicMap
+  .centerOn([-71.668006, 42.239650], "latlong")
+  .setScale(8);
+  
+
+  baseLayer = d3.carto.layer.tile();
+  baseLayer
+  .path("lmullen.ke033le7")
+  .tileType("mapbox")
+  .label("Base");
+
+  churchesDiachronic = d3.carto.layer.csv();
+
+  churchesDiachronic
+  .path("congregationalists.csv")
+  .label("Churches")
+  .cssClass("church")
+  .renderMode("svg")
+  .x("lon")
+  .y("lat")
+  .markerSize(0)
+  .clickableFeatures(false)
+  .on("load", churchesOverTime);
+
+  diachronicMap
+  .addCartoLayer(baseLayer)
+  .addCartoLayer(churchesDiachronic)
+  .zoomable(false);
+
+}
+
+function churchesOverTime() {
+
+  var date = 1620;
+
+  timer = setInterval(function() {
+
+    console.log(date);
+
+    churchesDiachronic.g().selectAll("circle")
+      .transition()
+      .attr("r", function(d) {
+        if(+d.organized <= date) 
+          return 5;
+        else
+          return 0;
+      })
+      .duration(250)
+      .ease("linear");
+
+    date++;
+    d3.select("#diachronic-date").text(date);
+
+    if(date >= 1854) clearInterval(timer);
+
+    }, 500)
 }
 
 function scaleChurchCircles() {
@@ -92,9 +164,16 @@ function deleteCongregationalists() {
   d3.select("#congregationalists-map").selectAll("*").remove();
 }
 
+function deleteDiachronic() {
+  clearInterval(timer);
+  d3.select("#diachronic-map").selectAll("*").remove();
+}
+
 var section = d3.selectAll("section"),
     congregationalistsNode = d3.select("#congregationalists"),
     congregationalistsIndex = section[0].indexOf(congregationalistsNode.node());
+    diachronicNode = d3.select("#diachronic"),
+    diachronicIndex = section[0].indexOf(diachronicNode.node());
 //     followAnchor = d3.select("#follow-anchor"),
 //     lorenz = d3.select("#lorenz"),
 //     lorenzIndex = section[0].indexOf(lorenz.node());
@@ -105,11 +184,13 @@ function refollow() {
 
 function activate(d, i) {
  if (i === congregationalistsIndex) drawCongregationalists();
+ if (i === diachronicIndex) drawDiachronic();
 //  if (i === lorenzIndex) startLorenz();
 }
 
 function deactivate(d, i) {
  if (i === congregationalistsIndex) deleteCongregationalists();
+ if (i === diachronicIndex) deleteDiachronic();
 //  if (i === followIndex) mystack.on("scroll.follow", null);
 //  if (i === lorenzIndex) stopLorenz();
 }
