@@ -58,8 +58,8 @@ function drawCongregationalists() {
 
   baseLayer = d3.carto.layer.tile();
   baseLayer
-  .path("lmullen.ke033le7")
-  .tileType("mapbox")
+  .path("terrain-background")
+  .tileType("stamen")
   .label("Base");
 
   churches = d3.carto.layer.csv();
@@ -93,8 +93,8 @@ function drawDiachronic() {
 
   baseLayer = d3.carto.layer.tile();
   baseLayer
-  .path("lmullen.ke033le7")
-  .tileType("mapbox")
+  .path("terrain-background")
+  .tileType("stamen")
   .label("Base");
 
   churchesDiachronic = d3.carto.layer.csv();
