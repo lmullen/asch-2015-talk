@@ -47,13 +47,16 @@ function hideCommentary() {
   d3.select("#commentary").classed("hidden", true);
 }
 
+/**
+ * Map of Congregationalists in 1854
+ */
+
 function drawCongregationalists() {
   congregationalistsMap = d3.carto.map();
   d3.select("#congregationalists-map").call(congregationalistsMap);
   congregationalistsMap
   .centerOn([-71.668006, 42.239650], "latlong")
   .setScale(8);
-
 
   baseLayer = d3.carto.layer.tile();
   baseLayer
@@ -81,6 +84,29 @@ function drawCongregationalists() {
 
 }
 
+function scaleChurchCircles() {
+  var memberScale = d3.scale.sqrt().domain([0,800]).range([0,15]).clamp(true);
+  churches.g().selectAll("circle")
+  .transition()
+  .attr("r", function(d) {
+    if(d.members > 0) {
+      return memberScale(d.members);
+    } else {
+      return 1;
+    }
+  })
+  .duration(2500)
+  .delay(function(d, i) { return i / 500 * 2500; });
+
+}
+
+function deleteCongregationalists() {
+  d3.select("#congregationalists-map").selectAll("*").remove();
+}
+
+/**
+ * Map of Congregationalist churches over time
+ */
 
 function drawDiachronic() {
   diachronicMap = d3.carto.map();
@@ -118,7 +144,7 @@ function drawDiachronic() {
 
 function churchesOverTime() {
 
-  var date = 1620;
+  var date = 1630;
 
   timer = setInterval(function() {
 
@@ -141,21 +167,16 @@ function churchesOverTime() {
   }, 250)
 }
 
-function scaleChurchCircles() {
-  var memberScale = d3.scale.sqrt().domain([0,800]).range([0,15]).clamp(true);
-  churches.g().selectAll("circle")
-  .transition()
-  .attr("r", function(d) {
-    if(d.members > 0) {
-      return memberScale(d.members);
-    } else {
-      return 1;
-    }
-  })
-  .duration(2500)
-  .delay(function(d, i) { return i / 500 * 2500; });
 
+function deleteDiachronic() {
+  clearInterval(timer);
+  d3.select("#diachronic-map").selectAll("*").remove();
 }
+
+
+/**
+ * Imitation of Gaustad map
+ */
 
 function drawGaustad() {
   gaustadMap = d3.carto.map();
@@ -178,13 +199,6 @@ function drawGaustad() {
 
 function choroplethCensus() {
   console.log("hello")
-  // census.g().append("path")
-  // .datum(topojson.meshArcs(census.features(), function(a, b) {
-  //   console.log(a.properties.s !== b.properties.s);
-  //   return a.properties.s !== b.properties.s;
-  // }))
-  // .attr("class", "states")
-  // .attr("d", path)
 
   censusScale = d3.scale.threshold()
   .domain([1, 5, 15, 26])
@@ -201,15 +215,6 @@ function choroplethCensus() {
   // gaustadMap.mode("projection").projection(albers).refresh();
 
 
-}
-
-function deleteCongregationalists() {
-  d3.select("#congregationalists-map").selectAll("*").remove();
-}
-
-function deleteDiachronic() {
-  clearInterval(timer);
-  d3.select("#diachronic-map").selectAll("*").remove();
 }
 
 function deleteGaustad() {
