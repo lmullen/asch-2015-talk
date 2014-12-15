@@ -1,6 +1,51 @@
-var mystack = stack()
-.on("activate", activate)
-.on("deactivate", deactivate);
+/**
+ * Draw maps when slides are activated
+ */
+var mystack = stack().on("activate", activate).on("deactivate", deactivate);
+
+function findIndex(selector) {
+  var section = d3.selectAll("section");
+  var node = d3.select(selector);
+  var index = section[0].indexOf(node.node());
+  return index;
+}
+
+var congregationalistsIndex = findIndex("#congregationalists");
+var diachronicIndex = findIndex("#diachronic");
+var gaustadIndex = findIndex("#gaustad-slide");
+
+function activate(d, i) {
+  switch(i) {
+    case congregationalistsIndex:
+      drawCongregationalists();
+      break;
+    case diachronicIndex:
+      drawDiachronic();
+      break;
+    case gaustadIndex:
+      drawGaustad();
+      break;
+  }
+}
+
+function deactivate(d, i) {
+  switch(i) {
+    case congregationalistsIndex:
+      deleteCongregationalists();
+      break;
+    case diachronicIndex:
+      deleteDiachronic();
+      break;
+    case gaustadIndex:
+      deleteGaustad();
+      break;
+  }
+}
+
+function hideCommentary() {
+  d3.selectAll("section aside").classed("hidden", true);
+  d3.select("#commentary").classed("hidden", true);
+}
 
 function drawCongregationalists() {
   congregationalistsMap = d3.carto.map();
@@ -171,31 +216,3 @@ function deleteGaustad() {
   d3.select("#gaustad-map").selectAll("*").remove();
 }
 
-var section = d3.selectAll("section"),
-congregationalistsNode = d3.select("#congregationalists"),
-congregationalistsIndex = section[0].indexOf(congregationalistsNode.node());
-diachronicNode = d3.select("#diachronic"),
-diachronicIndex = section[0].indexOf(diachronicNode.node());
-gaustadNode = d3.select("#gaustad-slide"),
-gaustadIndex = section[0].indexOf(gaustadNode.node());
-
-function refollow() {
-  followAnchor.style("top", (followIndex + (1 - mystack.scrollRatio()) / 2 - d3.event.offset) * 100 + "%");
-}
-
-function activate(d, i) {
-  if (i === congregationalistsIndex) drawCongregationalists();
-  if (i === diachronicIndex) drawDiachronic();
-  if (i === gaustadIndex) drawGaustad();
-}
-
-function deactivate(d, i) {
-  if (i === congregationalistsIndex) deleteCongregationalists();
-  if (i === diachronicIndex) deleteDiachronic();
-  if (i === gaustadIndex) deleteGaustad();
-}
-
-function hideCommentary() {
-  d3.selectAll("section aside").classed("hidden", true);
-  d3.select("#commentary").classed("hidden", true);
-}
