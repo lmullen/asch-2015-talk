@@ -9,7 +9,7 @@ census.topojson : nhgis0035_csv.zip nhgis0035_shape.zip
 	topojson -o $@ --simplify-proportion 0.12 \
 		--id-property GISJOIN \
 		-e census/nhgis0035_csv/nhgis0035_ds10_1850_county.csv \
-		-p cong=+AET003 -- \
+		-p cong=+AET003 -p s=STATE -- \
 		census/counties.shp
 
 deploy:

@@ -32,9 +32,9 @@
 
 }
 
-.census {
+.county {
   fill: none;
-  stroke: darkgray;
+  stroke: lightblue;
   stroke-width: 1px;
 }
 
@@ -64,4 +64,40 @@ h2 {
 
 #d3MapLayerBox {
   display: none;
+}
+
+section aside {
+    font-size: 0.6rem;
+    line-height: 1rem;
+    background: #FFF8B8;
+    background-image: -webkit-linear-gradient(top, #FFF8B8, #FEED77);
+    box-shadow: 0 8px 16px rgba(0,0,0,.5);
+    color: #000;
+    display: block;
+    font-size: 16px;
+    padding: 16px;
+    position: absolute;
+    right: 40px;
+    bottom: 120px;
+    width: 328px;
+    -o-transform: rotate(-1deg);
+    -ms-transform: rotate(-1deg);
+    -moz-transform: rotate(-1deg);
+    -webkit-transform: rotate(-1deg);
+    -o-transition: opacity 100ms linear;
+    -ms-transition: opacity 100ms linear;
+    -moz-transition: opacity 100ms linear;
+    -webkit-transition: opacity 100ms linear;
+}
+
+.hidden {
+  display: none;
+}
+
+#commentary {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index:100;
+  font-size: 10px;
 }
