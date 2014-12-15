@@ -1,0 +1,31 @@
+{
+  "name": "asch-2015-talk",
+  "version": "0.0.0",
+  "homepage": "http://lincolnmullen.com/projects/asch-2015/",
+  "authors": [
+    "Lincoln Mullen <lincoln@lincolnmullen.com>"
+  ],
+  "description": "Talk on mapping religion at ASCH 2015",
+  "main": "index.html",
+  "license": "CC-BY",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "d3": "~3.5.2",
+    "queue-async": "~1.0.7",
+    "topojson": "~1.6.18",
+    "d3-carto-map": "emeeks/d3-carto-map",
+    "d3-plugins": "*",
+    "stack": "mbostock/stack#gh-pages"
+  },
+  "resolutions": {
+    "d3": "~3.5.2"
+  }
+}

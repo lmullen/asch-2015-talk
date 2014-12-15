@@ -2,15 +2,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 
-<link rel="stylesheet" href="d3map.css">
+<link rel="stylesheet" href="lib/d3-carto-map/d3map.css">
 <link rel="stylesheet" href="style.css">
 
-<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="http://d3js.org/queue.v1.min.js"></script>
-<script src="http://d3js.org/topojson.v1.min.js" charset="utf-8"></script>
-<script src="d3.carto.map.js" charset="utf-8"></script>
-<script src="tile.js" charset="utf-8"></script>
-<script src="stack.v1.min.js"></script>
+<script src="lib/d3/d3.min.js"></script>
+<script src="lib/queue-async/queue.min.js"></script>
+<script src="lib/topojson/topojson.js"></script>
+<script src="lib/d3-carto-map/d3.carto.map.min.js"></script>
+<script src="lib/d3-plugins/geo/tile/tile.js" charset="utf-8"></script>
+<script src="lib/stack/stack.v1.min.js"></script>
 
 <a id="commentary" onclick="hideCommentary();">Hide the commentary</a>
 
@@ -260,6 +260,7 @@
 
 function hideCommentary() {
   d3.selectAll("section aside").classed("hidden", true);
+  d3.select("#commentary").classed("hidden", true);
 }
 
   </script>

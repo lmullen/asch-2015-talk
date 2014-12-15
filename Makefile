@@ -1,4 +1,7 @@
-all: census.topojson
+all: census.topojson 
+
+install : 
+	bower install
 
 census.topojson : nhgis0035_csv.zip nhgis0035_shape.zip
 	unzip -o nhgis0035_csv.zip -d census
@@ -14,8 +17,8 @@ census.topojson : nhgis0035_csv.zip nhgis0035_shape.zip
 
 deploy:
 	rsync --progress --delete -avz \
-		*.topojson *.html *.css *.js *.csv *.jpg \
-		reclaim:~/public_html/lincolnmullen.com/projects/asch-mapping/
+		*.topojson *.html *.css *.js *.csv *.jpg lib \
+		reclaim:~/public_html/lincolnmullen.com/projects/asch-2015/
 
 clean:
 	rm -rf shp/
