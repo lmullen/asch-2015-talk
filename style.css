@@ -62,20 +62,6 @@ h2 {
   display: none;
 }
 
-#commentary {
-  position: absolute;
-  left:70%;
-  bottom: 80px;
-  z-index:100;
-  font-size: 10px;
-  border: 1px solid lightgray;
-  padding: 10px;
-  cursor: pointer;
-  text-decoration: none;
-  color: black;
-  line-height: 1rem;
-}
-
 code a {
   text-decoration: none;
 }
