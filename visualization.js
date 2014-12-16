@@ -1,7 +1,12 @@
 /**
  * Draw maps when slides are activated
  */
-var mystack = stack().on("activate", activate).on("deactivate", deactivate);
+function ready() {
+  mystack = stack().on("activate", activate).on("deactivate", deactivate);
+  congregationalistsIndex = findIndex("#congregationalists");
+  diachronicIndex = findIndex("#diachronic");
+  gaustadIndex = findIndex("#gaustad-slide");
+}
 
 function findIndex(selector) {
   var section = d3.selectAll("section");
@@ -9,10 +14,6 @@ function findIndex(selector) {
   var index = section[0].indexOf(node.node());
   return index;
 }
-
-var congregationalistsIndex = findIndex("#congregationalists");
-var diachronicIndex = findIndex("#diachronic");
-var gaustadIndex = findIndex("#gaustad-slide");
 
 function activate(d, i) {
   switch(i) {
@@ -43,8 +44,10 @@ function deactivate(d, i) {
 }
 
 function hideCommentary() {
-  d3.selectAll("section aside").classed("hidden", true);
-  d3.select("#commentary").classed("hidden", true);
+  d3.selectAll("section.text").remove();
+  d3.selectAll("#commentary").remove();
+  d3.selectAll("aside").remove()
+  ready();
 }
 
 /**
@@ -188,7 +191,7 @@ function drawGaustad() {
   .label("Census")
   .renderMode("svg")
   .cssClass("county")
-  .clickableFeatures(false)
+  .clickableFeatures(true)
   .on("load", choroplethCensus);
 
   gaustadMap.addCartoLayer(census);
@@ -198,8 +201,6 @@ function drawGaustad() {
 }
 
 function choroplethCensus() {
-  console.log("hello")
-
   censusScale = d3.scale.threshold()
   .domain([1, 5, 15, 26])
   .range(["#ffffff", "#dfc27d", "#bf812d", "#8c510a", "#543005"])
