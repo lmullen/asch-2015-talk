@@ -47,9 +47,8 @@ section {
 }
 
 h2 {
-  left: 20px;
-  top: 10px;
-  position: fixed;
+  /* top: 10px; */
+  position: relative;
   /* color: white; */
   z-index:20;
 } 
