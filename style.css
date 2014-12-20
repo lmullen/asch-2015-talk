@@ -67,17 +67,18 @@ code a {
 
 section.text p {
   width: 66%;
-  font-size: 0.7em;
+  font-size: 0.6em;
   line-height: 1.25em;
+  margin: 1rem;
+  float: left;
 }
 
 aside {
-  font-size: 0.4em;
-  left: 70%;
-  position: absolute;
+  font-size: 0.40em;
   width: 20%;
   line-height: 1.4em;
-  margin-top: -4rem;
+  float:right;
+  margin: 1rem
 }
 
 a, .green {
