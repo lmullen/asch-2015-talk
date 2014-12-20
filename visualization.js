@@ -77,7 +77,7 @@ function drawCongregationalists() {
   .x("lon")
   .y("lat")
   .markerSize(0)
-  .clickableFeatures(false)
+  .clickableFeatures(true)
   .on("load", scaleChurchCircles);
 
   congregationalistsMap
