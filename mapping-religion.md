@@ -2,15 +2,11 @@
 
 Begin with atlases on my desk.
 
-I also have Laurie Maffly-Kipps's memorably titled review, "If It's
-South Dakota You Must Be Episcopalian." Maffly-Kipp has dealt with many
+I also have  Maffly-Kipp has dealt with many
 of the major problems: how do we take what we know from categories and
 put them on the map.
 
-If I can sum up the critiques in two categories: "In the end, we are
-still limited by data that is partial, ambiguous, and clearly slanted
-toward things that can be counted and people that traditionally have
-been seen as significant." Furthermore, the medium of the maps can only
+If I can sum up the critiques in two categories:  Furthermore, the medium of the maps can only
 express certain things. The authors of these atlases were not unaware of
 these questions, and Maffly-Kipp "raise these concerns less as a
 critique of the New Historical Atlas and more as a general
@@ -171,10 +167,7 @@ text in. Because after all what can take us across the globe like words?
 
 [^1]: Laurie F. Maffly-Kipp, “If It’s South Dakota You Must Be
     Episcopalian: Lies, Truth-Telling, and the Mapping of U.S.
-    Religion,” *Church History* 71, no. 1 (March 1, 2002): 132–42. Cf.
-    Laurie F. Maffly-Kipp, “Putting Religion on the Map,” *The Journal
-    of American History* 94, no. 2 (September 1, 2007): 522–29,
-    doi:10.2307/25094964.
+    Religion,” *Church History* 71, no. 1 (March 1, 2002): 132–42. 
 
 [^2]: Johanna Drucker, “Humanities Approaches to Graphical Display” 5,
     no. 1 (2011),
