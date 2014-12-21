@@ -81,7 +81,7 @@ code a {
 section.text p {
   width: 75%;
   font-size: 0.6em;
-  line-height: 1.25em;
+  line-height: 1.4em;
   margin: 1rem;
   float: left;
 }
@@ -92,6 +92,11 @@ aside {
   line-height: 1.4em;
   float:right;
   margin-top: 1rem
+}
+
+aside h2 {
+  line-height: 1.2em;
+  font-size: 1.75em;
 }
 
 a, .green {
