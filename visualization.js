@@ -6,6 +6,7 @@ function ready() {
   congregationalistsIndex = findIndex("#congregationalists");
   diachronicIndex = findIndex("#diachronic");
   gaustadIndex = findIndex("#gaustad-slide");
+  classMapIndex = findIndex("#class-map");
 }
 
 function findIndex(selector) {
@@ -26,6 +27,9 @@ function activate(d, i) {
     case gaustadIndex:
       drawGaustad();
       break;
+    case classMapIndex:
+      embedClassMap();
+      break;
   }
 }
 
@@ -39,6 +43,9 @@ function deactivate(d, i) {
       break;
     case gaustadIndex:
       deleteGaustad();
+      break;
+    case classMapIndex:
+      deleteClassMap();
       break;
   }
 }
@@ -82,8 +89,23 @@ function drawCongregationalists() {
 
   congregationalistsMap
   .addCartoLayer(baseLayer)
-  .addCartoLayer(churches)
-  .zoomable(false);
+  .addCartoLayer(churches);
+
+  d3.select("#united-states").on("click", function() {
+    var us = [[-124.73292, 24.54512], [-66.94993, 49.38437]];
+    congregationalistsMap.zoomTo(us, "latlong", 0.9, 5000)
+  })
+
+
+  d3.select("#new-england").on("click", function() {
+    var ne = [[-67.701452, 47.133902], [-73.612097,41.067165]];
+    congregationalistsMap.zoomTo(ne, "latlong", 0.9, 5000);
+  })
+
+  d3.select("#midwest").on("click", function() {
+    var midwest = [[-97.056921, 48.955181], [-74.249304, 41.463548]];
+    congregationalistsMap.zoomTo(midwest, "latlong", 0.9, 5000);
+  })
 
 }
 
@@ -99,7 +121,7 @@ function scaleChurchCircles() {
     }
   })
   .duration(2500)
-  .delay(function(d, i) { return i / 500 * 2500; });
+  .delay(function(d, i) { return i / 2500 * 2500; });
 
 }
 
@@ -222,3 +244,17 @@ function deleteGaustad() {
   d3.select("#gaustad-map").selectAll("*").remove();
 }
 
+
+/**
+ * Class map
+ */
+
+function embedClassMap() {
+  var iframe = d3.select("#class-map")
+  .append("iframe")
+  .attr("src", "http://omeka.lts.brandeis.edu/neatline/fullscreen/mapping-bostons-religions")
+}
+
+function deleteClassMap() {
+  d3.select("#class-map").select("iframe").remove();
+}
