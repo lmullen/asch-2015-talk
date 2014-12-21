@@ -2,7 +2,7 @@
 
 .map {
   height:100%;
-  width:78%;
+  width:75%;
   z-index: 10;
   font-size: initial;
   top:0!important;
@@ -15,7 +15,7 @@
 
 iframe {
   height:100%;
-  width:78%;
+  width:75%;
   z-index: 10;
   font-size: initial;
   top:0!important;
@@ -79,7 +79,7 @@ code a {
 }
 
 section.text p {
-  width: 66%;
+  width: 75%;
   font-size: 0.6em;
   line-height: 1.25em;
   margin: 1rem;
@@ -88,10 +88,10 @@ section.text p {
 
 aside {
   font-size: 0.40em;
-  width: 15%;
+  width: 20%;
   line-height: 1.4em;
   float:right;
-  margin: 1rem
+  margin-top: 1rem
 }
 
 a, .green {
@@ -114,4 +114,8 @@ code a {
 h3 {
   font-size: 1.5em;
   line-height: 1.2em;
+}
+
+#diachronic-date {
+  font-size:3em;
 }

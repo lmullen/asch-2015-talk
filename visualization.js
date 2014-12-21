@@ -65,8 +65,8 @@ function drawCongregationalists() {
   congregationalistsMap = d3.carto.map();
   d3.select("#congregationalists-map").call(congregationalistsMap);
   congregationalistsMap
-  .centerOn([-71.668006, 42.239650], "latlong")
-  .setScale(8);
+  .centerOn([-75.668006, 42.8], "latlong")
+  .setScale(6);
 
   baseLayer = d3.carto.layer.tile();
   baseLayer
@@ -102,22 +102,27 @@ function drawCongregationalists() {
     congregationalistsMap.zoomTo(ne, "latlong", 0.9, 5000);
   })
 
+  d3.select("#connecticut").on("click", function() {
+    var ct = [[-73.72778, 40.98886], [-71.78765, 42.04965]];
+    congregationalistsMap.zoomTo(ct, "latlong", 0.9, 5000);
+  })
+
   d3.select("#midwest").on("click", function() {
-    var midwest = [[-97.056921, 48.955181], [-74.249304, 41.463548]];
+    var midwest = [[-97.056921, 46.955181], [-74.249304, 41.463548]];
     congregationalistsMap.zoomTo(midwest, "latlong", 0.9, 5000);
   })
 
 }
 
 function scaleChurchCircles() {
-  var memberScale = d3.scale.sqrt().domain([0,800]).range([0,15]).clamp(true);
+  var memberScale = d3.scale.sqrt().domain([0,800]).range([1,8]).clamp(true);
   churches.g().selectAll("circle")
   .transition()
   .attr("r", function(d) {
     if(d.members > 0) {
       return memberScale(d.members);
     } else {
-      return 1;
+      return 2;
     }
   })
   .duration(2500)
@@ -138,7 +143,7 @@ function drawDiachronic() {
   d3.select("#diachronic-map").call(diachronicMap);
   diachronicMap
   .centerOn([-71.668006, 42.239650], "latlong")
-  .setScale(8);
+  .setScale(7);
 
 
   baseLayer = d3.carto.layer.tile();
