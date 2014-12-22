@@ -111,6 +111,10 @@ a, .green {
   color: rgb(113, 90, 56);
 }
 
+li a {
+  cursor: pointer;
+}
+
 a {
   text-decoration: underline;
 }

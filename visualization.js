@@ -64,7 +64,7 @@ function drawCongregationalists() {
   congregationalistsMap = d3.carto.map();
   d3.select("#congregationalists-map").call(congregationalistsMap);
   congregationalistsMap
-  .centerOn([-75.668006, 42.8], "latlong")
+  .centerOn([-75.668006, 42.9], "latlong")
   .setScale(6);
 
   baseLayer = d3.carto.layer.tile();
@@ -147,7 +147,7 @@ function drawCongregationalists() {
 }
 
 function scaleChurchCircles() {
-  var memberScale = d3.scale.sqrt().domain([0,800]).range([1,10]).clamp(true);
+  var memberScale = d3.scale.sqrt().domain([0,800]).range([1,8]).clamp(true);
   churches.g().selectAll("circle")
   .transition()
   .attr("r", function(d) {

@@ -360,12 +360,42 @@
     <section class="text">
 
       <p>
-        The question is whether we can extend the kind of work that we are all 
-        doing in cities to the United States more generally? We had in that 
-        kind of a map an intimate look at neighborhoods. This is rather 
-        different than the kinds of maps that Gaustad and others have created. 
-        Ours spanned a city; their's spanned a nation.
+        All of our methodological differences from the <i>New Historical 
+          Atlas</i> depended on looking at a city rather than a nation. Is 
+        there a way to extend these kind of methods to a larger scale?
       </p>
+
+      <p>
+        Most of the maps in the Gaustad atlas depict a particular denomination 
+        in a given year using aggregated data from the U.S.  Census Bureau 
+        about the number of congregations in a county. These maps are thus 
+        able to give an overview of the regional prominence of particular 
+        religious groups county by county. The map of Congregationalists in 
+        the 1850 census is typical.
+      </p>
+
+      <aside>
+        The maps in the <i>New Historical Atlas</i> are unreliable for change 
+        over time, however, because they inexplicably change the color scales 
+        from year to year (let alone from denomination to denomination). Thus 
+        some maps appear to show the growth of a particular religious group, 
+        when what actually happened is impossible to discern visually given 
+        the changing scales.
+      </aside>
+
+      <p>
+        Thanks to the <a href="https://www.nhgis.org/">National Historic 
+          Geographic Information System</a> (NHGIS) at the University of 
+        Minnesota, it is easy to reproduce any of the maps in the Gaustad 
+        atlas which are based on the census. NHGIS has digitized the 
+        aggregate-level census data and keyed it to <a 
+          href="http://en.wikipedia.org/wiki/Shapefile">shapefiles</a> of 
+        United States in each decade. We can use that data to create web (or 
+        print, for that matter) maps which are visually similar to Gaustad's 
+        and which depict the exact same data.
+
+      </p>
+
     </section>
 
     <section style="background-image:url('gaustad-congregationalists-1850.png');
@@ -373,11 +403,12 @@
       background-position: center;">
     </section>
 
+
     <section id="gaustad-slide">
       <div id="gaustad-map" class="map" style="pointer-events:none;">
       </div>
       <aside>
-        <h2> Gaustad map</h2>
+        <h2>Reproduction of Gaustad's Map of Congregationalists in 1850</h2>
         <p>
           A reproduction of Gaustad's map using data from Minnesota Population 
           Center, <i><a href="https://www.nhgis.org/">National Historical 
@@ -386,9 +417,64 @@
           county-level aggregated data from the U.S. Census used by Gaustad, 
           Dishno, and Barlow.
         </p>
+        <p>
+          This map and all other maps in this presentation were made with 
+          Elijah Meeks's <a 
+            href="https://github.com/emeeks/d3-carto-map">d3-carto-map</a> 
+          library, which in turn depends on Mike Bostock's <a 
+            href="http://d3js.org/">D3.js</a> visualization library.
+        </p>
       </aside>
     </section>
 
+    <section class="text">
+      <p>
+        The mere translation of the Gaustad maps from print to digital gains 
+        us nothing. Beyond the strong presence of Congregationalism in New 
+        England and its spread to parts of Ohio and Illinois, we cannot learn 
+        much from county-level maps. Were we to zoom into Massachusetts, 
+        we would learn that each county has 25 churches or more (how many 
+        more?) but we would not know where those churches were located, how 
+        close they were to other Congregationalist churches (let alone 
+        churches of other denominations) or how many congregants they had. The 
+        problem is that the county is too coarse for meaningful maps.
+      </p>
+
+      <aside>
+        The sharp-eyed critic will notice that the print Gaustad both includes 
+        a legend and uses the Albers projection, which is much preferable to 
+        the default Mercator projection in my reproduction.
+      </aside>
+
+      <p>
+        But there is much more detailed information available to us. I mean 
+        most obviously the records of many denominations, which often contain 
+        detailed information about membership, and usually at a minimum 
+        contain long lists of congregations. Often they even include 
+        information about Canada. Once these lists are digitized and
+        geocoded, they can provide maps of much greater resolution than the 
+        aggregate census data.
+      </p>
+
+      <aside>
+        We need not limit ourselves to denominational records in print. Any 
+        source that contains repeated references to place can be mapped. (See, 
+        for instance, Brian Croxall's <a 
+          href="http://www.briancroxall.net/dh/assignments/mapping-mrs-dalloway/">class 
+          assignment</a> to map Virginia Woolf’s Mrs. Dalloway. I have <a 
+          href="http://lincolnmullen.com/projects/paulists-map/">used similar 
+          techniques</a> to map manuscript records from the Paulist Fathers; 
+        Jannelle Legg has mapped the <a 
+          href="http://jannellelegg.com/portfolio/FinalProject/CMDM.html">Church 
+          Mission to Deaf-Mutes</a> from the very unsystematic reports of the 
+        missionaries.
+      </aside>
+    </section>
+
+    <section style="background-image:url('congregationalist-records.png');
+      background-size: contain; background-repeat: no-repeat;
+      background-position: center;">
+    </section>
 
     <section id="congregationalists">
       <div id="congregationalists-map" class="map">
@@ -397,11 +483,18 @@
       <aside>
         <h2>Congregationalists in 1853</h2>
         <p>
-          This map is based on data digitized from the Congregationalist 
-          Yearbook for 1854. Data is available on GitHub.
-        </p> 
-        <p>
-          Try zooming the map to various places:
+          This map is based on data for 2,212 congregations in the United 
+          States and Canada transcribed from the <i><a 
+              href="https://archive.org/details/americancongrega04amer">Year-Book 
+              of the American Congregational Union for the Year 1854</a></i> 
+          (New York, 1854). The geocoded data is available on <a 
+            href="https://github.com/lmullen/demographics-religion">GitHub</a>.
+          </p> 
+
+          <p>
+          Clicking on a congregation will show more information about it.  
+          Follow the link in the pop-up to see the original record. Try zooming 
+          the map to various places:
         </p>
 
         <ul>
@@ -413,7 +506,16 @@
           <li id="midwest"><a>Midwest</a></li>
           <li id="ohio"><a>Ohio</a></li>
         </ul>
+
+        <p>
+          <em>N.B.</em> The locations of congregations are precise only the 
+          city. To avoid overlap, when a city was home to more than one 
+          congregation, the congregations have been randomly distributed 
+          within the city.
+        </p>
+
       </aside>
+
     </section>
 
     <section class="text">
