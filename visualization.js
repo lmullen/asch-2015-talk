@@ -141,7 +141,7 @@ function drawCongregationalists() {
 
   d3.select("#ohio").on("click", function() {
     var ohio = [[-84.82019, 38.41079], [-80.51880, 41.97753]];
-    congregationalistsMap.zoomTo(ohio, "latlong", 0.8, 4000);
+    congregationalistsMap.zoomTo(ohio, "latlong", 0.7, 4000);
   })
 
 }
