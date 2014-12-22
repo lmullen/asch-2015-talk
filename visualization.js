@@ -52,8 +52,7 @@ function deactivate(d, i) {
 
 function hideCommentary() {
   d3.selectAll("section.text").remove();
-  d3.selectAll("#commentary").remove();
-  d3.selectAll("aside").remove()
+  d3.selectAll("#title aside").remove()
   ready();
 }
 
@@ -117,23 +116,38 @@ function drawCongregationalists() {
 
   d3.select("#new-england").on("click", function() {
     var ne = [[-67.701452, 47.133902], [-73.612097,41.067165]];
-    congregationalistsMap.zoomTo(ne, "latlong", 0.9, 5000);
+    congregationalistsMap.zoomTo(ne, "latlong", 0.9, 4000);
+  })
+
+  d3.select("#massachusetts").on("click", function() {
+    var ma = [[-73.175799, 42.713157], [-69.855884, 41.555233]];
+    congregationalistsMap.zoomTo(ma, "latlong", 0.9, 4000);
+  })
+
+  d3.select("#boston").on("click", function() {
+    var gb = [[-71.202340, 42.409350], [-70.935921, 42.261137]];
+    congregationalistsMap.zoomTo(gb, "latlong", 0.3, 4000);
   })
 
   d3.select("#connecticut").on("click", function() {
     var ct = [[-73.72778, 40.98886], [-71.78765, 42.04965]];
-    congregationalistsMap.zoomTo(ct, "latlong", 0.9, 5000);
+    congregationalistsMap.zoomTo(ct, "latlong", 0.9, 4000);
   })
 
   d3.select("#midwest").on("click", function() {
     var midwest = [[-97.056921, 46.955181], [-74.249304, 41.463548]];
-    congregationalistsMap.zoomTo(midwest, "latlong", 0.9, 5000);
+    congregationalistsMap.zoomTo(midwest, "latlong", 0.9, 4000);
+  })
+
+  d3.select("#ohio").on("click", function() {
+    var ohio = [[-84.82019, 38.41079], [-80.51880, 41.97753]];
+    congregationalistsMap.zoomTo(ohio, "latlong", 0.8, 4000);
   })
 
 }
 
 function scaleChurchCircles() {
-  var memberScale = d3.scale.sqrt().domain([0,800]).range([1,8]).clamp(true);
+  var memberScale = d3.scale.sqrt().domain([0,800]).range([0,10]).clamp(true);
   churches.g().selectAll("circle")
   .transition()
   .attr("r", function(d) {

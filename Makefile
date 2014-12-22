@@ -1,7 +1,10 @@
-all: census.topojson 
+all: census.topojson us.topojson
 
 install : 
 	bower install
+
+us.topojson : us.shp
+	topojson -o $@ -- $^
 
 census.topojson : nhgis0035_csv.zip nhgis0035_shape.zip
 	unzip -o nhgis0035_csv.zip -d census
