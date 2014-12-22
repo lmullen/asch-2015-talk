@@ -147,7 +147,7 @@ function drawCongregationalists() {
 }
 
 function scaleChurchCircles() {
-  var memberScale = d3.scale.sqrt().domain([0,800]).range([0,10]).clamp(true);
+  var memberScale = d3.scale.sqrt().domain([0,800]).range([1,10]).clamp(true);
   churches.g().selectAll("circle")
   .transition()
   .attr("r", function(d) {
