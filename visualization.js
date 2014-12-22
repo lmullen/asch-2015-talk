@@ -224,7 +224,7 @@ function churchesOverTime() {
     date++;
     d3.select("#diachronic-date").text(date);
 
-    if(date >= 1854) clearInterval(timer);
+    if(date >= 1853) clearInterval(timer);
 
   }, 250)
 }
