@@ -20,7 +20,7 @@ census.topojson : nhgis0035_csv.zip nhgis0035_shape.zip
 
 deploy:
 	rsync --progress --delete -avz \
-		*.topojson *.html *.css *.js *.csv *.png lib \
+		*.topojson *.html *.css *.js *.csv *.png *.jpg lib \
 		reclaim:~/public_html/lincolnmullen.com/projects/asch-2015/
 
 clean:
