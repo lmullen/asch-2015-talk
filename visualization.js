@@ -191,8 +191,8 @@ function drawDiachronic() {
   .label("Churches")
   .cssClass("church")
   .renderMode("svg")
-  .x("lon")
-  .y("lat")
+  .x("jlon")
+  .y("jlat")
   .markerSize(0)
   .clickableFeatures(false)
   .on("load", churchesOverTime);
@@ -214,7 +214,7 @@ function churchesOverTime() {
     .transition()
     .attr("r", function(d) {
       if(+d.organized <= date)
-        return 5;
+        return 4;
       else
         return 0;
     })
