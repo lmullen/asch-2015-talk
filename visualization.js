@@ -74,21 +74,39 @@ function drawCongregationalists() {
   .tileType("stamen")
   .label("Base");
 
+  states = d3.carto.layer.topojson();
+  states
+  .path("us.topojson")
+  .renderMode("canvas")
+  .cssClass("county")
+  .label("States");
+
   churches = d3.carto.layer.csv();
+
+  churchesModal = d3.carto.modal();
+  churchesModal.formatter(function(d) {
+    return "<p>" + d.church + " " + d.city + ", " + d.state + "</p>" +
+      "<p>Members: " + d.members + "</p>" +
+      "<p>Minister: " + d.minister + "</p>" +
+      "<p>Organized: " + d.organized + "</p>" +
+      "<p>Citation: <a target='_blank' href='" + d.url + "'>" + d.citation + "</a></p>"
+  })
 
   churches
   .path("congregationalists.csv")
   .label("Churches")
   .cssClass("church")
   .renderMode("svg")
-  .x("lon")
-  .y("lat")
+  .x("jlon")
+  .y("jlat")
   .markerSize(0)
+  .modal(churchesModal)
   .clickableFeatures(true)
   .on("load", scaleChurchCircles);
 
   congregationalistsMap
   .addCartoLayer(baseLayer)
+  .addCartoLayer(states)
   .addCartoLayer(churches);
 
   d3.select("#united-states").on("click", function() {

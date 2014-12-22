@@ -103,6 +103,10 @@ a, .green {
   color: rgb(137, 177, 81);
 }
 
+.d3MapModalContent p a {
+  color: white;
+}
+
 .brown {
   color: rgb(113, 90, 56);
 }
